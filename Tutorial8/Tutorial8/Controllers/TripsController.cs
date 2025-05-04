@@ -43,7 +43,7 @@ public class TripsController : ControllerBase
         var trip = await _tripsService.GetTripById(id);
         if (trip == null)
         {
-            return NotFound("Trip not found");
+            return NotFound(new {message = "Trip not found"});
         }
 
         return Ok(trip);

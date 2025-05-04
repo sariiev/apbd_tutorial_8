@@ -42,7 +42,7 @@ public class ClientsController : Controller
         }
         catch (ClientNotFoundException)
         {
-            return NotFound("Client not found");
+            return NotFound(new {message = "Client not found"});
         }
     }
 
@@ -61,25 +61,25 @@ public class ClientsController : Controller
     {
         if (!_nameRegex.IsMatch(clientDto.FirstName))
         {
-            return BadRequest("Invalid first name format");
+            return BadRequest(new {message = "Invalid first name format"});
         }
         if (!_nameRegex.IsMatch(clientDto.LastName))
         {
-            return BadRequest("Invalid last name format");
+            return BadRequest(new {message = "Invalid last name format"});
         }
         if (!_emailRegex.IsMatch(clientDto.Email))
         {
-            return BadRequest("Invalid email format");
+            return BadRequest(new {message = "Invalid email format"});
         }
         
         if (!_telephoneRegex.IsMatch(clientDto.Telephone))
         {
-            return BadRequest("Invalid telephone format");
+            return BadRequest(new {message = "Invalid telephone format"});
         }
 
         if (!_peselRegex.IsMatch(clientDto.Pesel))
         {
-            return BadRequest("Invalid pesel format");
+            return BadRequest(new {message = "Invalid pesel format"});
         }
         return new ObjectResult(await _clientsService.CreateClient(clientDto))
         {
@@ -116,19 +116,19 @@ public class ClientsController : Controller
         }
         catch (ClientNotFoundException)
         {
-            return NotFound("Client not found");
+            return NotFound(new {message = "Client not found"});
         }
         catch (TripNotFoundException)
         {
-            return NotFound("Trip not found");
+            return NotFound(new {message = "Trip not found"});
         }
         catch (MaxPeopleReachedException)
         {
-            return Conflict("No slots available for provided trip");
+            return Conflict(new {message = "No slots available for provided trip"});
         }
         catch (ClientAlreadyRegisteredForTripException)
         {
-            return Conflict("Client is already registered for provided trip");
+            return Conflict(new {message = "Client is already registered for provided trip"});
         }
     }
 
@@ -157,15 +157,15 @@ public class ClientsController : Controller
         }
         catch (ClientNotFoundException)
         {
-            return NotFound("Client not found");
+            return NotFound(new {message = "Client not found"});
         }
         catch (TripNotFoundException)
         {
-            return NotFound("Trip not found");
+            return NotFound(new {message = "Trip not found"});
         }
         catch (ClientNotRegisteredForTripException)
         {
-            return NotFound("Client is not registered for provided trip");
+            return NotFound(new {message = "Client is not registered for provided trip"});
         }
     }
 }
